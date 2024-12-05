@@ -52,7 +52,7 @@
 
           // Fetch rank data from the API
           $.getJSON(
-            `http://127.0.0.1:5000/getrankeddata?username=${username}&platform=${platform}`,
+            `https://tracker.achileb.com/getrankeddata?username=${username}&platform=${platform}`,
             function (data) {
               // Clear previous rank data
               $("#rankProgressions").empty();
