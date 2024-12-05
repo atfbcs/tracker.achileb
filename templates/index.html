@@ -6,6 +6,7 @@
     <title>tracker.achileb</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../static/css/styles.css" />
+    <link rel="shortcut icon" href="https://vercel.achileb.com/assets/iban-B0C2qTms.svg" type="image/x-icon" />
   </head>
   <body>
     <div class="form-container">
@@ -52,7 +53,7 @@
 
           // Fetch rank data from the API
           $.getJSON(
-            `https://tracker.achileb.com/getrankeddata?username=${username}&platform=${platform}`,
+            `http://127.0.0.1:5000/getrankeddata?username=${username}&platform=${platform}`,
             function (data) {
               // Clear previous rank data
               $("#rankProgressions").empty();
