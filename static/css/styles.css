@@ -1,0 +1,235 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General Reset and Body Styling */
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(145deg, #000000d8, #000000);
+  color: #e4e4e4; /* Light text for contrast */
+  line-height: 1.6;
+}
+
+/* Form Container */
+.form-container {
+  width: auto;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  text-align: center;
+  margin: 0px auto;
+  padding: 20px;
+  overflow: hidden;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background-color: rgba(66, 66, 66, 0.726);
+  padding: 40px 15px;
+  border-radius: 20px;
+}
+
+label {
+  font-size: 1.1rem;
+}
+
+input,
+select {
+  padding: 10px;
+  width: 250px;
+  font-size: 1rem;
+  border: 2px solid #444;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background-color: #0066cc;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
+
+/* Loading Bar Container */
+#loadingBarContainer {
+  width: 100%;
+  height: 5px;
+  background-color: #444;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: none; /* Hidden by default */
+}
+
+/* Loading Bar */
+#loadingBar {
+  width: 0;
+  height: 100%;
+  background-color: #0066cc;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+/* Main Container for Rank Progressions */
+#rankProgressions {
+  width: 80%;
+  margin: 50px auto;
+  border-radius: 16px;
+  filter: grayscale(0.35);
+  display: none;
+}
+
+/* Rank Section Styling */
+.rank-section {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #3a3a4e, #1e1e2f);
+  border-radius: 8px;
+  margin: 0px 0;
+  padding: 6px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+  transform: scale(0.8);
+}
+
+/* Hover Effect */
+.rank-section:hover {
+  transform: translateY(-8px) scale(0.82);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Rank Image Section */
+.rank-image {
+  flex: 1;
+  text-align: center;
+  padding-right: 20px;
+}
+
+.rank-image img {
+  max-width: 120px;
+  height: auto;
+  background: transparent;
+  filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.522));
+  transition: transform 0.3s ease;
+  filter: saturate(2);
+}
+
+.rank-image img:hover {
+  transform: scale(1.1);
+}
+
+/* Rank Information Section */
+.rank-info {
+  flex: 2;
+  text-align: left;
+  font-size: 1.2rem;
+  color: #ffffff;
+  padding-left: 20px;
+}
+
+.rank-info div {
+  margin: 8px 0;
+}
+
+.rank-info span {
+  font-weight: 600;
+  color: #00d8ff; /* Highlight in cyan for a clean contrast */
+}
+
+/* Game Played Section */
+.games-played {
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.games-played div {
+  margin: 8px 0;
+}
+
+/* Rank Specific Colors */
+.rank-champion {
+  background: linear-gradient(145deg, #ff4b7c, #611137); /* Champion Pink */
+  filter: contrast(0.9) opacity(0.9);
+}
+
+.rank-diamond {
+  background: linear-gradient(145deg, #8e44ad, #4b255a); /* Diamond Purple */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+.rank-emerald {
+  background: linear-gradient(145deg, #2ecc71, #104e2a); /* Emerald Green */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+.rank-platinum {
+  background: linear-gradient(145deg, #14a7e0, #116175); /* Platinum Orange */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+.rank-gold {
+  background: linear-gradient(145deg, #f39c12, #79630b); /* Gold Yellow */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+.rank-silver {
+  background: linear-gradient(145deg, #bdc3c7, #3f4041); /* Silver Gray */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+.rank-bronze {
+  background: linear-gradient(145deg, #745e49, #271d14); /* Bronze Brown */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+.rank-copper {
+  background: linear-gradient(145deg, #853126, #220505); /* Copper Orange */
+  filter: contrast(0.8) opacity(0.9);
+}
+
+/* Responsive Styling for Small Screens */
+@media (max-width: 768px) {
+  #rankProgressions {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .rank-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rank-image {
+    padding-right: 0;
+    text-align: left;
+  }
+
+  .rank-info {
+    padding-left: 0;
+    margin-top: 12px;
+  }
+
+  .games-played {
+    margin-top: 12px;
+  }
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tracker.achileb</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <form id="rankForm">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          required
+        />
+        <select id="platform" name="platform" required>
+          <option value="ubi">Ubisoft</option>
+          <option value="psn">PlayStation</option>
+          <option value="xbl">Xbox</option>
+        </select>
+
+        <button type="submit">Submit</button>
+
+        <div id="loadingBarContainer" style="display: none">
+          <div id="loadingBar"></div>
+        </div>
+      </form>
+    </div>
+    <div id="rankProgressions"></div>
+
+    <script>
+      // Handle form submission
+      $("#rankForm").on("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get user inputs
+        const username = $("#username").val().trim();
+        const platform = $("#platform").val();
+
+        // Check if inputs are valid
+        if (username && platform) {
+          // Show the loading bar
+          $("#loadingBarContainer").fadeIn(); // Show the loading bar container
+          $("#loadingBar").css("width", "0%"); // Reset the loading bar
+
+          // Animate the loading bar
+          $("#loadingBar").animate({ width: "100%" }, 28000);
+
+          // Fetch rank data from the API
+          $.getJSON(
+            `http://127.0.0.1:5000/getrankeddata?username=${username}&platform=${platform}`,
+            function (data) {
+              // Clear previous rank data
+              $("#rankProgressions").empty();
+              // Rank images mapping
+              const rankImages = {
+                "COPPER I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/copper-1.png",
+                "COPPER II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/copper-2.png",
+                "COPPER III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/copper-3.png",
+                "COPPER IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/copper-4.png",
+                "COPPER V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/copper-5.png",
+
+                "BRONZE I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/bronze-1.png",
+                "BRONZE II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/bronze-2.png",
+                "BRONZE III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/bronze-3.png",
+                "BRONZE IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/bronze-4.png",
+                "BRONZE V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/bronze-5.png",
+
+                "SILVER I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/silver-1.png",
+                "SILVER II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/silver-2.png",
+                "SILVER III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/silver-3.png",
+                "SILVER IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/silver-4.png",
+                "SILVER V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/silver-5.png",
+
+                "GOLD I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/gold-1.png",
+                "GOLD II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/gold-2.png",
+                "GOLD III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/gold-3.png",
+                "GOLD IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/gold-4.png",
+                "GOLD V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/gold-5.png",
+
+                "PLATINUM I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/platinum-1.png",
+                "PLATINUM II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/platinum-2.png",
+                "PLATINUM III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/platinum-3.png",
+                "PLATINUM IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/platinum-4.png",
+                "PLATINUM V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/platinum-5.png",
+
+                "EMERALD I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/emerald-1.png",
+                "EMERALD II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/emerald-2.png",
+                "EMERALD III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/emerald-3.png",
+                "EMERALD IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/emerald-4.png",
+                "EMERALD V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/emerald-5.png",
+
+                "DIAMOND I":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/diamond-1.png",
+                "DIAMOND II":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/diamond-2.png",
+                "DIAMOND III":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/diamond-3.png",
+                "DIAMOND IV":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/diamond-4.png",
+                "DIAMOND V":
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s28/small/diamond-5.png",
+
+                CHAMPION:
+                  "https://trackercdn.com/cdn/r6.tracker.network/ranks/s23/small/champions.png",
+              };
+
+              // Render the rank sections
+              const rankProgressions =
+                document.getElementById("rankProgressions");
+              data.rank_progression.forEach((item) => {
+                const rankSection = document.createElement("div");
+                rankSection.classList.add("rank-section");
+
+                // Apply rank-specific color class
+                let rankClass = "";
+                switch (item.rank) {
+                  case "CHAMPION":
+                    rankClass = "rank-champion";
+                    break;
+                  case "DIAMOND I":
+                  case "DIAMOND II":
+                  case "DIAMOND III":
+                  case "DIAMOND IV":
+                  case "DIAMOND V":
+                    rankClass = "rank-diamond";
+                    break;
+                  case "EMERALD I":
+                  case "EMERALD II":
+                  case "EMERALD III":
+                  case "EMERALD IV":
+                  case "EMERALD V":
+                    rankClass = "rank-emerald";
+                    break;
+                  case "PLATINUM I":
+                  case "PLATINUM II":
+                  case "PLATINUM III":
+                  case "PLATINUM IV":
+                  case "PLATINUM V":
+                    rankClass = "rank-platinum";
+                    break;
+                  case "GOLD I":
+                  case "GOLD II":
+                  case "GOLD III":
+                  case "GOLD IV":
+                  case "GOLD V":
+                    rankClass = "rank-gold";
+                    break;
+                  case "SILVER I":
+                  case "SILVER II":
+                  case "SILVER III":
+                  case "SILVER IV":
+                  case "SILVER V":
+                    rankClass = "rank-silver";
+                    break;
+                  case "BRONZE I":
+                  case "BRONZE II":
+                  case "BRONZE III":
+                  case "BRONZE IV":
+                  case "BRONZE V":
+                    rankClass = "rank-bronze";
+                    break;
+                  case "COPPER I":
+                  case "COPPER II":
+                  case "COPPER III":
+                  case "COPPER IV":
+                  case "COPPER V":
+                    rankClass = "rank-copper";
+                    break;
+                  default:
+                    rankClass = "rank-default";
+                }
+
+                rankSection.classList.add(rankClass); // Add rank-specific class
+
+                rankSection.innerHTML = `
+                    <div class="rank-image">
+                        <img src="${rankImages[item.rank]}" alt="${
+                  item.rank
+                } image">
+                    </div>
+                    <div class="rank-info">
+                        <div>${item.rank}</div>
+                        <div><span>Average RP:</span> ${Math.round(
+                          item.average_rp
+                        )}</div>
+                    </div>
+                    <div class="games-played">
+                        <div><span>Games Played:</span> ${item.games}</div>
+                    </div>
+                `;
+
+                rankProgressions.appendChild(rankSection);
+              });
+              // After data is loaded, fade out the form and fade in the rankProgressions
+              $(".form-container").fadeOut(function () {
+                $("#rankProgressions").fadeIn();
+                $("#loadingBarContainer").fadeOut(); // Hide the loading bar
+              });
+            }
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
